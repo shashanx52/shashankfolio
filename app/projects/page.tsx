@@ -32,8 +32,8 @@ const projects = [
     title: "Portfolio Website",
     description: "A dynamic portfolio website built with Next.js and Tailwind CSS, showcasing my skills, projects, and experiences.",
     image: "/projects/portfolio.png",
-    github: "https://github.com/shashanx52/portfolio",
-    demo: "https://shashanxfolio.vercel.app"
+    github: "https://github.com/shashanx52/shashankfolio/",
+    demo: "https://shashanx.netlify.app/"
   },
   {
     title: "SakhiG - Your Best Friend",
