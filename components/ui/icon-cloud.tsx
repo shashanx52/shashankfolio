@@ -24,7 +24,7 @@ function easeOutCubic(t: number): number {
 export function IconCloud({ icons, images }: IconCloudProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [iconPositions, setIconPositions] = useState<Icon[]>([]);
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [rotation] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -136,10 +136,10 @@ export function IconCloud({ icons, images }: IconCloudProps) {
     if (!ctx) return;
 
     iconPositions.forEach((icon) => {
-      const cosX = Math.cos(rotationRef.current.x);
-      const sinX = Math.sin(rotationRef.current.x);
-      const cosY = Math.cos(rotationRef.current.y);
-      const sinY = Math.sin(rotationRef.current.y);
+      const cosX = Math.cos(rotationRef.current);
+      const sinX = Math.sin(rotationRef.current);
+      const cosY = Math.cos(rotationRef.current);
+      const sinY = Math.sin(rotationRef.current);
 
       const rotatedX = icon.x * cosY - icon.z * sinY;
       const rotatedZ = icon.x * sinY + icon.z * cosY;
@@ -160,8 +160,8 @@ export function IconCloud({ icons, images }: IconCloudProps) {
         );
         const targetY = Math.atan2(icon.x, icon.z);
 
-        const currentX = rotationRef.current.x;
-        const currentY = rotationRef.current.y;
+        const currentX = rotationRef.current;
+        const currentY = rotationRef.current;
         const distance = Math.sqrt(
           Math.pow(targetX - currentX, 2) + Math.pow(targetY - currentY, 2),
         );
@@ -197,10 +197,8 @@ export function IconCloud({ icons, images }: IconCloudProps) {
       const deltaX = e.clientX - lastMousePos.x;
       const deltaY = e.clientY - lastMousePos.y;
 
-      rotationRef.current = {
-        x: rotationRef.current.x + deltaY * 0.002,
-        y: rotationRef.current.y + deltaX * 0.002,
-      };
+      rotationRef.current += deltaY * 0.002;
+      rotationRef.current += deltaX * 0.002;
 
       setLastMousePos({ x: e.clientX, y: e.clientY });
     }
@@ -232,30 +230,23 @@ export function IconCloud({ icons, images }: IconCloudProps) {
         const progress = Math.min(1, elapsed / targetRotation.duration);
         const easedProgress = easeOutCubic(progress);
 
-        rotationRef.current = {
-          x:
-            targetRotation.startX +
-            (targetRotation.x - targetRotation.startX) * easedProgress,
-          y:
-            targetRotation.startY +
-            (targetRotation.y - targetRotation.startY) * easedProgress,
-        };
+        rotationRef.current =
+          targetRotation.startX +
+          (targetRotation.x - targetRotation.startX) * easedProgress;
 
         if (progress >= 1) {
           setTargetRotation(null);
         }
       } else if (!isDragging) {
-        rotationRef.current = {
-          x: rotationRef.current.x + (dy / canvas.height) * speed,
-          y: rotationRef.current.y + (dx / canvas.width) * speed,
-        };
+        rotationRef.current += (dy / canvas.height) * speed;
+        rotationRef.current += (dx / canvas.width) * speed;
       }
 
       iconPositions.forEach((icon, index) => {
-        const cosX = Math.cos(rotationRef.current.x);
-        const sinX = Math.sin(rotationRef.current.x);
-        const cosY = Math.cos(rotationRef.current.y);
-        const sinY = Math.sin(rotationRef.current.y);
+        const cosX = Math.cos(rotationRef.current);
+        const sinX = Math.sin(rotationRef.current);
+        const cosY = Math.cos(rotationRef.current);
+        const sinY = Math.sin(rotationRef.current);
 
         const rotatedX = icon.x * cosY - icon.z * sinY;
         const rotatedZ = icon.x * sinY + icon.z * cosY;

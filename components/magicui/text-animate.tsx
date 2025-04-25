@@ -31,10 +31,6 @@ interface TextAnimateProps extends MotionProps {
    */
   segmentClassName?: string;
   /**
-   * The delay before the animation starts
-   */
-  delay?: number;
-  /**
    * The duration of the animation
    */
   duration?: number;
@@ -54,10 +50,6 @@ interface TextAnimateProps extends MotionProps {
    * Whether to start animation when component enters viewport
    */
   startOnView?: boolean;
-  /**
-   * Whether to animate only once
-   */
-  once?: boolean;
   /**
    * The animation preset to use
    */
@@ -106,14 +98,13 @@ const defaultItemAnimationVariants: Record<
     container: defaultContainerVariants,
     item: {
       hidden: { opacity: 0, y: 20 },
-      show: (delay: number) => ({
+      show: {
         opacity: 1,
         y: 0,
         transition: {
-          delay,
           duration: 0.3,
         },
-      }),
+      },
       exit: {
         opacity: 0,
         y: 20,
@@ -144,7 +135,7 @@ const defaultItemAnimationVariants: Record<
     container: defaultContainerVariants,
     item: {
       hidden: { opacity: 0, filter: "blur(10px)", y: 20 },
-      show: (delay: number) => ({
+      show: {
         opacity: 1,
         filter: "blur(0px)",
         y: 0,
@@ -153,7 +144,7 @@ const defaultItemAnimationVariants: Record<
           opacity: { duration: 0.4 },
           filter: { duration: 0.3 },
         },
-      }),
+      },
       exit: {
         opacity: 0,
         filter: "blur(10px)",
@@ -170,7 +161,7 @@ const defaultItemAnimationVariants: Record<
     container: defaultContainerVariants,
     item: {
       hidden: { opacity: 0, filter: "blur(10px)", y: -20 },
-      show: (delay: number) => ({
+      show: {
         opacity: 1,
         filter: "blur(0px)",
         y: 0,
@@ -179,21 +170,20 @@ const defaultItemAnimationVariants: Record<
           opacity: { duration: 0.4 },
           filter: { duration: 0.3 },
         },
-      }),
+      },
     },
   },
   slideUp: {
     container: defaultContainerVariants,
     item: {
       hidden: { y: 20, opacity: 0 },
-      show: (delay: number) => ({
+      show: {
         y: 0,
         opacity: 1,
         transition: {
-          delay,
           duration: 0.3,
         },
-      }),
+      },
       exit: {
         y: -20,
         opacity: 0,
@@ -278,11 +268,10 @@ const defaultItemAnimationVariants: Record<
     container: defaultContainerVariants,
     item: {
       hidden: { scale: 1.5, opacity: 0 },
-      show: (delay: number) => ({
+      show: {
         scale: 1,
         opacity: 1,
         transition: {
-          delay,
           duration: 0.3,
           scale: {
             type: "spring",
@@ -290,7 +279,7 @@ const defaultItemAnimationVariants: Record<
             stiffness: 300,
           },
         },
-      }),
+      },
       exit: {
         scale: 1.5,
         opacity: 0,
@@ -302,16 +291,12 @@ const defaultItemAnimationVariants: Record<
 
 export function TextAnimate({
   children,
-  delay = 0,
-  duration = 0.3,
-  variants,
   className,
   segmentClassName,
   as: Component = "p",
   startOnView = true,
-  once = false,
   by = "word",
-  animation = "fadeIn",
+  animation,
   ...props
 }: TextAnimateProps) {
   const MotionComponent = motion.create(Component);

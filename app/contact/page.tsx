@@ -87,6 +87,7 @@ const Contact = () => {
                       required
                     ></textarea>
                   </div>
+                  <p className="text-sm text-gray-600">Don't hesitate to reach out. I'm always open to discussing new projects or opportunities.</p>
                   <button 
                     type="submit" 
                     className="btn btn-primary w-full sm:w-auto" 
