@@ -1,52 +1,35 @@
 'use client';
 import React from 'react';
-import HeroSection from './HeroSection';
-import DataCount from './DataCount';
-import Skills from './Skills';
+import Hero from './Hero';
+import Marquee from './Marquee';
+import About from './About';
+import Facts from './Facts';
+import MathGame from './MathGame';
+import Toolkit from './Toolkit';
+import Work from './Work';
+import Timeline from './Timeline';
+import Recognition from './Recognition';
+import Writing from './Writing';
+import Offduty from './Offduty';
 import Education from './Education';
-import LastDiv from './LastDiv';
-import Link from 'next/link';
+import Outro from './Outro';
 
 export default function Home() {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
-      <div className="container flex flex-col gap-4">
-        <HeroSection />
-        <DataCount />
-        <Skills />
-        <Education />
-        <LastDiv />
-      </div>
-      <Link
-        href="#"
-        onClick={(e) => {
-          e.preventDefault();
-          setTimeout(scrollToTop, 300);  // Delay for smooth scroll effect
-        }}
-        className="font-caveat flex items-center justify-center text-sm pt-5 pb-5 transform hover:scale-105 transition duration-300"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          className="bi bi-arrow-left rotate-90"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fillRule="evenodd"
-            d="M11.5 8a.5.5 0 0 1-.5-.5H4.707l3.146-3.146a.5.5 0 1 1-.708-.708l-4 4a.5.5 0 0 1 0 .708l4 4a.5.5 0 1 1 .708-.708L4.707 8.5h6.293a.5.5 0 0 1 .5-.5z"
-          />
-        </svg>
-         Scroll To Top
-      </Link>
+    <main className="mx-auto max-w-7xl px-5 sm:px-10">
+      <Hero />
+      <Marquee />
+      <About />
+      <Facts />
+      <MathGame />
+      <Toolkit />
+      <Work />
+      <Timeline />
+      <Recognition />
+      <Writing />
+      <Offduty />
+      <Education />
+      <Outro />
     </main>
   );
 }

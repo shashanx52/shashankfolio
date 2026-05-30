@@ -5,6 +5,14 @@ import Image from "next/image";
 import { FaLaptopCode } from "react-icons/fa";
 
 const skillCategories = {
+  "Data & Cloud": [
+    { name: "BigQuery", icon: "/skillslogos/bigquery.svg" },
+    { name: "SQL", icon: "/skillslogos/sql.svg" },
+    { name: "Looker", icon: "/skillslogos/looker.svg" },
+    { name: "Google Cloud", icon: "/skillslogos/gcp.svg" },
+    { name: "Google Sheets", icon: "/skillslogos/googlesheets.svg" },
+    { name: "n8n", icon: "/skillslogos/n8n.svg" },
+  ],
   Languages: [
     { name: "Python", icon: "/skillslogos/python.png" },
     { name: "C", icon: "/skillslogos/c.png" },
@@ -48,6 +56,11 @@ const skillCategories = {
 
 // Get all icons for the rotating circle
 const rotatingSkills = [
+  // Data & Cloud (current focus)
+  { name: "BigQuery", icon: "/skillslogos/bigquery.svg" },
+  { name: "SQL", icon: "/skillslogos/sql.svg" },
+  { name: "Looker", icon: "/skillslogos/looker.svg" },
+  { name: "Google Cloud", icon: "/skillslogos/gcp.svg" },
   // Core Languages
   { name: "Python", icon: "/skillslogos/python.png" },
   { name: "JavaScript", icon: "/skillslogos/js.png" },
@@ -179,7 +192,7 @@ const Skills: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-[#1A2333]/20"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl border border-white/40 dark:border-white/10 bg-white/50 dark:bg-[#1A2333]/50 backdrop-blur-xl shadow-xl shadow-blue-500/5"
           >
             {skillCategories[activeTab as keyof typeof skillCategories].map((skill, index) => (
               <motion.div
@@ -189,7 +202,7 @@ const Skills: React.FC = () => {
                 transition={{ duration: 0.2, delay: index * 0.05 }}
                 className="flex flex-col items-center gap-2"
               >
-                <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl bg-[#1A2333]/40 p-2 sm:p-3 hover:scale-110 transition-all duration-300">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl border border-white/40 dark:border-white/10 bg-white/70 dark:bg-[#1A2333]/60 p-2 sm:p-3 shadow-md hover:scale-110 hover:-translate-y-1 transition-all duration-300">
                   <Image
                     src={skill.icon}
                     alt={skill.name}
@@ -201,7 +214,7 @@ const Skills: React.FC = () => {
                     }}
                   />
       </div>
-                <span className="text-xs sm:text-sm text-center text-gray-400">
+                <span className="text-xs sm:text-sm text-center text-gray-600 dark:text-gray-300">
                   {skill.name}
                 </span>
               </motion.div>
