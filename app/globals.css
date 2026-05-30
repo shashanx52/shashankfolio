@@ -4,6 +4,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 /* ============================================================
@@ -29,6 +30,8 @@ body {
   letter-spacing: -0.011em;
   background-color: hsl(var(--paper));
   color: hsl(var(--ink));
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 ::selection {
