@@ -16,7 +16,7 @@ import Outro from './Outro';
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-7xl px-5 sm:px-10">
+    <main className="mx-auto w-full max-w-7xl px-5 sm:px-10">
       <Hero />
       <Marquee />
       <About />
