@@ -29,22 +29,24 @@ const About: React.FC = () => {
 
         <div className="sm:col-span-1">
           <Reveal delay={0.15}>
-            <div className="group relative aspect-[4/5] w-full overflow-hidden border hairline">
-              <Image
-                src="/shashank.jpg"
-                alt="Shashank Jha"
-                fill
-                sizes="(max-width: 640px) 100vw, 320px"
-                className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
-              />
-            </div>
-            <div className="mt-4 flex flex-col gap-1">
-              <a href="mailto:shashankjha.0052@gmail.com" className="mono text-sm link-underline">
-                shashankjha.0052@gmail.com
-              </a>
-              <a href="https://www.linkedin.com/in/shashanx/" target="_blank" rel="noopener noreferrer" className="mono text-sm link-underline">
-                linkedin.com/in/shashanx
-              </a>
+            <div className="flex flex-col items-center sm:items-start">
+              <div className="group relative aspect-[4/5] w-full max-w-[240px] overflow-hidden border hairline sm:max-w-none">
+                <Image
+                  src="/shashank.jpg"
+                  alt="Shashank Jha"
+                  fill
+                  sizes="(max-width: 640px) 240px, 320px"
+                  className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                />
+              </div>
+              <div className="mt-4 flex flex-col gap-1 text-center sm:text-left">
+                <a href="mailto:shashankjha.0052@gmail.com" className="mono text-sm link-underline">
+                  shashankjha.0052@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/shashanx/" target="_blank" rel="noopener noreferrer" className="mono text-sm link-underline">
+                  linkedin.com/in/shashanx
+                </a>
+              </div>
             </div>
           </Reveal>
         </div>

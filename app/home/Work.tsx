@@ -57,20 +57,18 @@ const Work: React.FC = () => {
               rel="noopener noreferrer"
               onMouseEnter={() => setHovered(p.no)}
               onMouseLeave={() => setHovered(null)}
-              className="group grid grid-cols-12 items-center gap-4 border-b hairline py-7 transition-colors"
+              className="group block border-b hairline py-6 transition-colors"
             >
-              <span className="mono col-span-2 text-sm ink-soft sm:col-span-1">{p.no}</span>
-              <div className="col-span-10 sm:col-span-6">
-                <h3 className="display text-3xl sm:text-4xl lg:text-5xl transition-transform duration-300 group-hover:translate-x-2">
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="display text-2xl sm:text-4xl lg:text-5xl transition-transform duration-300 group-hover:translate-x-2">
+                  <span className="mono mr-3 align-middle text-xs ink-soft">{p.no}</span>
                   {p.title}
                 </h3>
+                <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </div>
-              <span className="mono col-span-7 col-start-3 text-xs ink-soft sm:col-span-3 sm:col-start-auto">
-                {p.disciplines}
-              </span>
-              <div className="col-span-5 flex items-center justify-end gap-3 sm:col-span-2">
+              <div className="mt-2 flex items-center justify-between gap-4 pl-8">
+                <span className="mono text-xs ink-soft">{p.disciplines}</span>
                 <span className="mono text-xs ink-soft">{p.year}</span>
-                <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </div>
             </Link>
           </Reveal>

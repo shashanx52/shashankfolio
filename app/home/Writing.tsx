@@ -50,20 +50,16 @@ const Writing: React.FC = () => {
               href={a.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group grid grid-cols-12 items-baseline gap-3 border-b hairline py-6"
+              className="group block border-b hairline py-5"
             >
-              <span className="mono col-span-2 text-xs ink-soft sm:col-span-1">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="col-span-10 text-2xl sm:text-3xl font-bold tracking-tight transition-transform duration-300 group-hover:translate-x-2 sm:col-span-7">
-                {a.title}
-              </h3>
-              <span className="mono col-span-7 col-start-3 text-xs ink-soft sm:col-span-3 sm:col-start-auto">
-                {a.topic}
-              </span>
-              <span className="col-span-2 flex justify-end sm:col-span-1">
-                <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </span>
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl sm:text-3xl font-bold tracking-tight transition-transform duration-300 group-hover:translate-x-2">
+                  <span className="mono mr-3 align-middle text-xs ink-soft">{String(i + 1).padStart(2, "0")}</span>
+                  {a.title}
+                </h3>
+                <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </div>
+              <p className="mono mt-2 pl-7 text-xs ink-soft">{a.topic}</p>
             </Link>
           </Reveal>
         ))}
