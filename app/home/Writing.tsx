@@ -7,9 +7,9 @@ import Section from "./Section";
 
 const articles = [
   {
-    title: "Does Advertising Actually Work?",
-    topic: "Marketing · Essay",
-    href: "/writing/does-advertising-work",
+    title: "Meta Ads vs Google Ads: Who Actually Wins on ROAS?",
+    topic: "Essay · Marketing",
+    href: "/writing/meta-vs-google-ads-roas",
   },
   {
     title: "Dirichlet's Integral",
