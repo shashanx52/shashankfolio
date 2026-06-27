@@ -7,6 +7,11 @@ import Section from "./Section";
 
 const articles = [
   {
+    title: "Does Advertising Actually Work?",
+    topic: "Marketing · Essay",
+    href: "/writing/does-advertising-work",
+  },
+  {
     title: "Dirichlet's Integral",
     topic: "Engineering Maths",
     href: "https://www.geeksforgeeks.org/engineering-mathematics/dirichlets-integral/",
@@ -35,34 +40,39 @@ const articles = [
 
 const Writing: React.FC = () => {
   return (
-    <Section index="08" label="Writing">
+    <Section index="08" label="Writing" id="writing">
       <Reveal>
         <p className="mb-8 max-w-xl text-xl sm:text-2xl font-medium leading-snug tracking-tight">
           Articles I&apos;ve published on{" "}
-          <span className="ink-soft">GeeksforGeeks</span> — maths, aptitude and puzzles.
+          <span className="ink-soft">GeeksforGeeks</span> — maths, aptitude and
+          puzzles — plus a few essays of my own.
         </p>
       </Reveal>
 
       <div>
-        {articles.map((a, i) => (
-          <Reveal key={a.href} delay={i * 0.05}>
-            <Link
-              href={a.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block border-b hairline py-5"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="text-xl sm:text-3xl font-bold tracking-tight transition-transform duration-300 group-hover:translate-x-2">
-                  <span className="mono mr-3 align-middle text-xs ink-soft">{String(i + 1).padStart(2, "0")}</span>
-                  {a.title}
-                </h3>
-                <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </div>
-              <p className="mono mt-2 pl-7 text-xs ink-soft">{a.topic}</p>
-            </Link>
-          </Reveal>
-        ))}
+        {articles.map((a, i) => {
+          const isInternal = a.href.startsWith("/");
+          return (
+            <Reveal key={a.href} delay={i * 0.05}>
+              <Link
+                href={a.href}
+                {...(isInternal
+                  ? {}
+                  : { target: "_blank", rel: "noopener noreferrer" })}
+                className="group block border-b hairline py-5"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="text-xl sm:text-3xl font-bold tracking-tight transition-transform duration-300 group-hover:translate-x-2">
+                    <span className="mono mr-3 align-middle text-xs ink-soft">{String(i + 1).padStart(2, "0")}</span>
+                    {a.title}
+                  </h3>
+                  <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </div>
+                <p className="mono mt-2 pl-7 text-xs ink-soft">{a.topic}</p>
+              </Link>
+            </Reveal>
+          );
+        })}
       </div>
     </Section>
   );
