@@ -7,9 +7,18 @@ import Footer from "../../Footer";
 import Reveal from "../../components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Meta Ads vs Google Ads: Who Actually Wins on ROAS? — Shashank Jha",
+  /* The root layout's title template appends " — Shashank Jha", so the name is
+     no longer spelled out here; it was rendering twice. */
+  title: "Meta Ads vs Google Ads: Who Actually Wins on ROAS?",
   description:
     "Benchmarks, the attribution problem, and a decade of incrementality experiments — what actually decides whether Meta or Google delivers better ROAS.",
+  alternates: { canonical: "/writing/meta-vs-google-ads-roas" },
+  openGraph: {
+    type: "article",
+    title: "Meta Ads vs Google Ads: Who Actually Wins on ROAS?",
+    description:
+      "Benchmarks, the attribution problem, and a decade of incrementality experiments.",
+  },
 };
 
 const DEK =

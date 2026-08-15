@@ -2,7 +2,10 @@
 import React from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
-/** Thin ink progress bar pinned to the top of the viewport. */
+/**
+ * Thin accent progress bar pinned to the top of the viewport. Decorative, so it
+ * is hidden from assistive tech — the scrollbar already conveys this.
+ */
 const ScrollProgress: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -13,8 +16,9 @@ const ScrollProgress: React.FC = () => {
 
   return (
     <motion.div
+      aria-hidden="true"
       style={{ scaleX }}
-      className="fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left bg-[hsl(var(--ink))]"
+      className="fixed top-0 left-0 right-0 z-[60] h-[2px] origin-left bg-[hsl(var(--accent))]"
     />
   );
 };

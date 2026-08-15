@@ -10,6 +10,22 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  /*
+    `next lint` applied these ignores implicitly, but it is deprecated and is
+    removed in Next 16, so package.json now calls the ESLint CLI directly. The
+    CLI has no such defaults — without this block it lints Next's own generated
+    output (.next/types, next-env.d.ts) and reports hundreds of errors in code
+    nobody wrote.
+  */
+  {
+    ignores: [
+      ".next/**",
+      "out/**",
+      "build/**",
+      "node_modules/**",
+      "next-env.d.ts",
+    ],
+  },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 

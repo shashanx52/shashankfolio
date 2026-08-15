@@ -109,7 +109,7 @@ export default function Projects() {
         <section className="border-t hairline py-16 sm:py-24">
           <Reveal>
             <p className="label mb-4">Selected Work — 2024 / 2025</p>
-            <h1 className="display text-[14vw] leading-[0.86] sm:text-[10vw] lg:text-[9rem]">
+            <h1 className="display text-step-d">
               Projects
             </h1>
           </Reveal>

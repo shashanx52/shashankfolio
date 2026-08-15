@@ -17,9 +17,10 @@ const About: React.FC = () => {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-2xl text-base leading-relaxed ink-soft">
-              I work across data and marketing at Times Internet (The Economic Times) —
-              running performance analysis on Google Ads and Meta Ads, and building the
-              pipelines and dashboards that turn spend, ROAS and creative data into clear
+              I&apos;m a Product Analyst at Times Internet (The Economic Times) — where I
+              started as an AI &amp; Product Intern — running performance analysis on Google
+              Ads and Meta Ads, and building the pipelines and dashboards that turn spend,
+              ROAS and creative data into clear
               decisions. Outside of work I tinker with ML side-projects, automation and
               the occasional game — and I&apos;d always rather delete a manual report than
               maintain one.

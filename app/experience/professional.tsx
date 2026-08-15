@@ -2,12 +2,26 @@
 import React from 'react';
 import Reveal from '../components/Reveal';
 
-const experiences = [
+type Experience = {
+  date: string;
+  title: string;
+  company: string;
+  location: string;
+  /** Earlier title held at the same company. */
+  note?: string;
+  current?: boolean;
+  description: string;
+  tech: string;
+};
+
+const experiences: Experience[] = [
   {
     date: "Jan 2026 — Present",
-    title: "Data Analyst Intern",
+    title: "Product Analyst",
     company: "Times Internet — The Economic Times",
     location: "Noida · On-site",
+    note: "Previously AI & Product Intern",
+    current: true,
     description:
       "Built a centralized MIS dashboard covering 50+ video creatives and multiple ad sets for daily tracking of spend, plays, ROAS and creative efficiency. Automated 100% of paid-marketing and performance reporting into Google Sheets, cutting manual effort ~70–80%, and ran optimisation across Google & Meta Ads that lifted ROAS ~3%.",
     tech: "BigQuery · SQL · Looker · GCP · Python · Google Sheets · Automation",
@@ -64,7 +78,7 @@ export default function Professional() {
     <section className="border-t hairline py-16 sm:py-24">
       <Reveal>
         <p className="label mb-4">Career — Resume</p>
-        <h1 className="display text-[14vw] leading-[0.86] sm:text-[10vw] lg:text-[9rem]">
+        <h1 className="display text-step-d">
           Experience
         </h1>
       </Reveal>
@@ -73,12 +87,16 @@ export default function Professional() {
         {experiences.map((exp, i) => (
           <Reveal key={exp.company} delay={i * 0.06}>
             <article className="grid grid-cols-1 gap-3 border-t hairline py-9 sm:grid-cols-12 sm:gap-6">
-              <span className="mono text-sm ink-soft sm:col-span-3">{exp.date}</span>
+              <div className="mono flex items-baseline gap-2 text-sm ink-soft sm:col-span-3 sm:flex-col sm:gap-1">
+                <span>{exp.date}</span>
+                {exp.current ? <span className="tag-now">Current</span> : null}
+              </div>
               <div className="sm:col-span-9">
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">{exp.title}</h2>
+                <h2 className="text-step-3 font-bold tracking-tight">{exp.title}</h2>
                 <p className="mt-1 text-base font-medium ink-soft">
                   {exp.company} — {exp.location}
                 </p>
+                {exp.note ? <p className="mono mt-1 text-xs ink-soft">{exp.note}</p> : null}
                 <p className="mt-4 max-w-2xl text-base leading-relaxed">{exp.description}</p>
                 <p className="mono mt-4 text-xs ink-soft">{exp.tech}</p>
               </div>

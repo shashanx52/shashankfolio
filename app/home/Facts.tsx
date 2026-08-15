@@ -4,8 +4,9 @@ import Reveal from "../components/Reveal";
 import Section from "./Section";
 
 const facts = [
-  { k: "Discipline", v: "Data & Marketing Analytics" },
+  { k: "Role", v: "Product Analyst" },
   { k: "Currently", v: "The Economic Times (Times Internet)" },
+  { k: "Discipline", v: "Product & Marketing Analytics" },
   { k: "Core stack", v: "BigQuery · SQL · Python" },
   { k: "Marketing", v: "Google Ads · Meta Ads · ROAS" },
   { k: "Education", v: "B.Tech ECE, GGSIPU — 9.0/10" },

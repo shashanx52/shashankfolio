@@ -1,4 +1,10 @@
 'use client';
+/*
+  This file used to be app/home/page.tsx, which made it a *route* as well as a
+  component: the entire home page was served a second time at /home, without a
+  navbar or footer, competing with / in search results. Renaming it takes it out
+  of the router; next.config.js redirects /home to / for anything already linked.
+*/
 import React from 'react';
 import Hero from './Hero';
 import Marquee from './Marquee';
@@ -16,7 +22,7 @@ import Outro from './Outro';
 
 export default function Home() {
   return (
-    <main className="mx-auto w-full max-w-7xl px-5 sm:px-10">
+    <main id="main" className="mx-auto w-full max-w-7xl px-5 sm:px-10">
       <Hero />
       <Marquee />
       <About />

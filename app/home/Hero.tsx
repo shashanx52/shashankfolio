@@ -5,8 +5,8 @@ import { ArrowDown } from "lucide-react";
 import LocalTime from "../components/LocalTime";
 
 const roles = [
-  "Works with Data",
-  "Marketing & Ads",
+  "Product Analyst",
+  "Marketing & Ads Data",
   "BigQuery & SQL",
   "Automation Builder",
 ];
@@ -35,12 +35,12 @@ const Hero: React.FC = () => {
 
       {/* giant name specimen */}
       <div className="py-8 sm:py-14">
-        <p className="label mb-6">Specimen №001 — Data & Marketing</p>
+        <p className="label mb-6">Specimen №001 — Product &amp; Data</p>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="display text-[16vw] leading-[0.86] sm:text-[15vw] lg:text-[12.5rem]"
+          className="display text-step-d"
         >
           Shashank
           <br />
@@ -76,7 +76,7 @@ const Hero: React.FC = () => {
             <span className="ink-soft">
               clean systems, useful dashboards, and automation that quietly handles the boring work.
             </span>{" "}
-            Currently working with data &amp; marketing at The Economic Times.
+            Currently a Product Analyst at The Economic Times.
           </motion.p>
         </div>
       </div>

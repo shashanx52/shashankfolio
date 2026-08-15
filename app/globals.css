@@ -2,46 +2,139 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: clip;
-}
-
 /* ============================================================
-   Editorial design system — warm paper, ink type, minimal
+   Editorial design system — warm paper, ink type, one accent.
+   Everything below is token-first: components only reference
+   custom properties, never raw hex. Change a token here and the
+   whole site follows.
    ============================================================ */
+
 :root {
-  --paper: 43 30% 95%;   /* #F4F1EA warm off-white */
-  --ink: 0 0% 7%;        /* near-black */
-  --ink-soft: 0 0% 38%;  /* muted text */
-  --line: 0 0% 0% / 0.12;
+  /* ---- surface & ink ---------------------------------------- */
+  --paper: 43 30% 95%; /* #F4F1EA warm off-white */
+  --paper-raised: 40 33% 98%; /* cards / inputs sitting on paper */
+  --ink: 0 0% 7%; /* near-black body text */
+  --ink-soft: 0 0% 38%; /* secondary text — 5.9:1 on paper */
+  --ink-faint: 0 0% 55%; /* tertiary, decorative only */
+  --line: 0 0% 0% / 0.12; /* hairline rules */
+  --line-strong: 0 0% 0% / 0.28;
+
+  /* ---- accent ----------------------------------------------- */
+  /* Vermilion at 42% L is 5.2:1 on paper — passes AA for body text,
+     not just large type, so it can be used on links safely. */
+  --accent: 8 78% 42%;
+  --accent-ink: 40 33% 98%; /* text on top of a filled accent */
+  --accent-wash: 8 78% 42% / 0.09;
+
+  /* ---- type scale -------------------------------------------
+     Fluid from a 320px to a 1440px viewport. Replaces the old
+     text-[14vw] literals, which kept growing past 1440px and
+     blew the name off the side of ultrawide screens. */
+  --step-s: clamp(0.8125rem, 0.7924rem + 0.1004vw, 0.875rem);
+  --step-0: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.1143rem + 0.4286vw, 1.5rem);
+  --step-2: clamp(1.4375rem, 1.2768rem + 0.8036vw, 2rem);
+  --step-3: clamp(1.725rem, 1.4554rem + 1.3482vw, 2.669rem);
+  --step-4: clamp(2.069rem, 1.6438rem + 2.125vw, 3.556rem);
+  --step-5: clamp(2.481rem, 1.8369rem + 3.2232vw, 4.738rem);
+  --step-6: clamp(2.981rem, 2.0275rem + 4.7679vw, 6.319rem);
+  /* the giant name specimen */
+  --step-d: clamp(3.5rem, 0.7857rem + 13.5714vw, 13rem);
+
+  /* ---- rhythm ----------------------------------------------- */
+  --space-section: clamp(3.5rem, 8vw, 7.5rem);
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+  /* ---- motion ----------------------------------------------- */
+  --dur-fast: 160ms;
+  --dur: 300ms;
+  --dur-slow: 700ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  color-scheme: light;
 }
 
 [data-theme="night"] {
-  --paper: 0 0% 6%;      /* #0f0f0f */
-  --ink: 40 18% 90%;     /* warm off-white */
-  --ink-soft: 40 6% 60%;
+  --paper: 0 0% 6%; /* #0f0f0f */
+  --paper-raised: 0 0% 10%;
+  --ink: 40 18% 90%; /* warm off-white */
+  --ink-soft: 40 6% 62%; /* 6.4:1 on #0f0f0f */
+  --ink-faint: 40 5% 45%;
   --line: 0 0% 100% / 0.14;
+  --line-strong: 0 0% 100% / 0.32;
+
+  /* Lifted and desaturated so it reads as the same accent, at 6.4:1. */
+  --accent: 10 90% 64%;
+  --accent-ink: 0 0% 8%;
+  --accent-wash: 10 90% 64% / 0.14;
+
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  /* Anchor links land below the sticky header instead of under it. */
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
+  font-size: var(--step-0);
   letter-spacing: -0.011em;
   background-color: hsl(var(--paper));
   color: hsl(var(--ink));
   overflow-x: clip;
   max-width: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+/* Paper grain. Fixed and non-interactive, so it never repaints on
+   scroll and never eats a click. Kept faint enough to read as
+   texture rather than noise. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+[data-theme="night"] body::before {
+  opacity: 0.055;
 }
 
 ::selection {
-  background: hsl(var(--ink));
-  color: hsl(var(--paper));
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-ink));
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+
+  /* One visible, consistent focus ring for every interactive element.
+     The site previously relied on the UA default, which is invisible
+     against warm paper in Safari. */
+  :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Headings inherit the fluid scale rather than Tailwind's fixed rems. */
+  h1 {
+    font-size: var(--step-5);
+  }
+  h2 {
+    font-size: var(--step-4);
+  }
+  h3 {
+    font-size: var(--step-2);
   }
 }
 
@@ -49,7 +142,8 @@ body {
   /* Small monospace label, e.g. "01 — ABOUT" */
   .label {
     font-family: var(--font-geist-mono), ui-monospace, monospace;
-    @apply text-[11px] sm:text-xs font-medium uppercase tracking-[0.18em];
+    font-size: var(--step-s);
+    @apply font-medium uppercase tracking-[0.16em];
     color: hsl(var(--ink-soft));
   }
   .mono {
@@ -63,81 +157,83 @@ body {
   .hairline {
     border-color: hsl(var(--line));
   }
-  /* Text that's muted */
   .ink-soft {
     color: hsl(var(--ink-soft));
   }
+  .ink-accent {
+    color: hsl(var(--accent));
+  }
+
   /* Animated underline link */
   .link-underline {
     @apply relative inline-block;
   }
   .link-underline::after {
     content: "";
-    @apply absolute bottom-0 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-300;
+    @apply absolute bottom-0 left-0 h-px w-full origin-right scale-x-0 bg-current;
+    transition: transform var(--dur) var(--ease-out);
   }
-  .link-underline:hover::after {
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
     @apply origin-left scale-x-100;
+  }
+
+  /* "Current" marker beside a live role */
+  .tag-now {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    @apply inline-flex w-fit items-center gap-1.5 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.14em];
+    color: hsl(var(--accent));
+    background: hsl(var(--accent-wash));
+  }
+  .tag-now::before {
+    content: "";
+    @apply h-1.5 w-1.5 rounded-full;
+    background: hsl(var(--accent));
+  }
+
+  /* Skip link — visible only once focused */
+  .skip-link {
+    @apply sr-only;
+  }
+  .skip-link:focus-visible {
+    @apply not-sr-only fixed left-4 top-4 z-[100] px-4 py-2 text-sm font-medium no-underline;
+    background: hsl(var(--ink));
+    color: hsl(var(--paper));
   }
 }
 
 /* Infinite marquee */
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 .animate-marquee {
   animation: marquee 38s linear infinite;
 }
 
+/* One place that honours the OS "reduce motion" setting for everything
+   CSS-driven. Framer Motion is handled by <MotionConfig reducedMotion="user">. */
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-ping,
+  .animate-bounce {
     animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
   }
 }
 
-/* ---- daisyUI / shadcn token vars (kept for form components) ---- */
-@layer base {
-  :root {
-    --background: 43 30% 95%;
-    --foreground: 0 0% 7%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --radius: 0.5rem;
-  }
-  .dark {
-    --background: 0 0% 6%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-  }
-}
+/* The shadcn/daisyUI palette that used to live here is gone along with the
+   daisyUI plugin — nothing referenced it. `border-border` now resolves to the
+   editorial --line token (see tailwind.config.ts), so the default border colour
+   on every element follows the theme. */
