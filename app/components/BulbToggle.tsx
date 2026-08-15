@@ -6,20 +6,22 @@ import { motion, useAnimationControls } from "framer-motion";
  * Pull-cord light switch that toggles the daisyUI theme.
  * Light theme ("fantasy") = bulb glowing; dark ("night") = bulb off.
  */
+type Theme = "fantasy" | "night";
+
 const BulbToggle: React.FC = () => {
-  const [theme, setTheme] = useState("fantasy");
+  const [theme, setTheme] = useState<Theme>("fantasy");
   const [mounted, setMounted] = useState(false);
   const cord = useAnimationControls();
 
-  useEffect(() => setMounted(true), []);
-
   useEffect(() => {
-    if (!mounted) return;
-    const saved = localStorage.getItem("theme") || "fantasy";
-    setTheme(saved);
-    document.documentElement.setAttribute("data-theme", saved);
-    document.body.setAttribute("data-theme", saved);
-  }, [mounted]);
+    /* The inline script in app/layout.tsx already resolved the theme (stored
+       choice, else OS preference) and applied it before first paint. Read it
+       back instead of deciding a second time — two sources of truth here is
+       what produced the light-theme flash on every navigation. */
+    const current = document.documentElement.getAttribute("data-theme");
+    setTheme(current === "night" ? "night" : "fantasy");
+    setMounted(true);
+  }, []);
 
   const on = theme === "fantasy";
 
@@ -29,11 +31,14 @@ const BulbToggle: React.FC = () => {
       .then(() =>
         cord.start({ y: 0, transition: { type: "spring", stiffness: 700, damping: 14 } })
       );
-    const next = on ? "night" : "fantasy";
+    const next: Theme = on ? "night" : "fantasy";
     setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
-    document.body.setAttribute("data-theme", next);
-    localStorage.setItem("theme", next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      /* private-mode Safari throws on write; the theme still applies for this visit */
+    }
   };
 
   if (!mounted) return <div className="h-7 w-9" aria-hidden />;
@@ -41,10 +46,12 @@ const BulbToggle: React.FC = () => {
   return (
     <div className="relative h-7 w-9">
       <button
+        type="button"
         onClick={toggle}
+        aria-pressed={on}
         aria-label={on ? "Turn off the lights" : "Turn on the lights"}
         title="Pull the string"
-        className="absolute -top-4 left-0 h-24 w-9 cursor-pointer outline-none"
+        className="absolute -top-4 left-0 h-24 w-9 cursor-pointer"
       >
         <svg width="36" height="96" viewBox="0 0 36 96" fill="none" className="overflow-visible">
           <defs>

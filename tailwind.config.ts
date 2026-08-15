@@ -1,5 +1,10 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * The editorial tokens in app/globals.css are the source of truth. This file
+ * only exposes them to Tailwind so components can write `text-step-3` or
+ * `text-accent` instead of hand-rolling `text-[hsl(var(--accent))]` each time.
+ */
 export default {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -7,62 +12,57 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-  	extend: {
-  		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			}
-  		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		}
-  	}
+    extend: {
+      colors: {
+        /* editorial palette */
+        paper: {
+          DEFAULT: "hsl(var(--paper))",
+          raised: "hsl(var(--paper-raised))",
+        },
+        ink: {
+          DEFAULT: "hsl(var(--ink))",
+          soft: "hsl(var(--ink-soft))",
+          faint: "hsl(var(--ink-faint))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          ink: "hsl(var(--accent-ink))",
+          wash: "hsl(var(--accent-wash))",
+        },
+        rule: {
+          DEFAULT: "hsl(var(--line))",
+          strong: "hsl(var(--line-strong))",
+        },
+
+        /* Default border colour applied to every element by globals.css. */
+        border: "hsl(var(--line))",
+      },
+      fontSize: {
+        "step-s": "var(--step-s)",
+        "step-0": "var(--step-0)",
+        "step-1": "var(--step-1)",
+        "step-2": "var(--step-2)",
+        "step-3": "var(--step-3)",
+        "step-4": "var(--step-4)",
+        "step-5": "var(--step-5)",
+        "step-6": "var(--step-6)",
+        "step-d": "var(--step-d)",
+      },
+      spacing: {
+        section: "var(--space-section)",
+        gutter: "var(--gutter)",
+      },
+      maxWidth: {
+        measure: "68ch",
+      },
+      transitionTimingFunction: {
+        editorial: "var(--ease-out)",
+      },
+    },
   },
-  plugins: [
-    require('daisyui'),
-      require("tailwindcss-animate")
-],
-  daisyui: {
-    themes: ["fantasy", "night"],
-  },
-  darkMode: ['selector', '[data-theme="night"]']
+  plugins: [],
+  /* daisyUI is gone — nothing on the site used its component classes, and its
+     theme layer fought the tokens above. The data-theme attribute is still the
+     switch, it is just read by our own CSS now. */
+  darkMode: ["selector", '[data-theme="night"]'],
 } satisfies Config;

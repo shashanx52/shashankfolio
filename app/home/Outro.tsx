@@ -19,7 +19,7 @@ const Outro: React.FC = () => {
       </Reveal>
 
       <Reveal delay={0.05}>
-        <h2 className="display text-[12vw] leading-[0.9] sm:text-[9vw] lg:text-[8rem]">
+        <h2 className="display text-step-6">
           Let&apos;s build
           <br />
           something<span className="ink-soft">.</span>
