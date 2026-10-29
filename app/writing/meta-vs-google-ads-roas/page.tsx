@@ -21,6 +21,31 @@ export const metadata: Metadata = {
   },
 };
 
+/*
+  BlogPosting so the essay can be cited as a standalone work with a named
+  author, rather than read as loose text on a portfolio. author points at the
+  same Person node the root layout declares, which is what ties an AI engine's
+  citation of this essay back to the Shashank Jha entity.
+*/
+const URL_PATH = "https://shashanx.in/writing/meta-vs-google-ads-roas";
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": `${URL_PATH}#article`,
+  headline: "Meta Ads vs Google Ads: Who Actually Wins on ROAS?",
+  description:
+    "Benchmarks, the attribution problem, and a decade of incrementality experiments — what actually decides whether Meta or Google delivers better ROAS.",
+  url: URL_PATH,
+  mainEntityOfPage: { "@type": "WebPage", "@id": URL_PATH },
+  datePublished: "2026-06-27",
+  dateModified: "2026-08-15",
+  inLanguage: "en",
+  author: { "@id": "https://shashanx.in/#person" },
+  publisher: { "@id": "https://shashanx.in/#person" },
+  about: ["Return on ad spend", "Meta Ads", "Google Ads", "Marketing attribution"],
+};
+
 const DEK =
   "Everyone has an opinion. Far fewer have measured it properly. Here is what the benchmarks, the attribution problems, and a decade of incrementality experiments actually say.";
 
@@ -216,6 +241,10 @@ const SOURCES: { title: string; meta: string; url: string }[] = [
 export default function Page() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <main className="mx-auto min-h-screen max-w-7xl px-5 sm:px-10">
         <Navbar />
 
