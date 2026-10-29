@@ -20,7 +20,7 @@ const Outro: React.FC = () => {
 
       <Reveal delay={0.05}>
         <h2 className="display text-step-6">
-          Let&apos;s build
+          Let&apos;s build{" "}
           <br />
           something<span className="ink-soft">.</span>
         </h2>

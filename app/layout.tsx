@@ -26,7 +26,7 @@ export const metadata: Metadata = {
      localhost in production and link previews break. */
   metadataBase: new URL(SITE),
   title: {
-    default: "Shashank Jha — Product Analyst",
+    default: "Shashank Jha — Product Analyst at The Economic Times",
     template: "%s — Shashank Jha",
   },
   description: DESCRIPTION,
