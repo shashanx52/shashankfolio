@@ -57,16 +57,12 @@ export const metadata: Metadata = {
     siteName: "Shashank Jha",
     title: "Shashank Jha — Product Analyst",
     description: DESCRIPTION,
-    images: [
-      { url: "/shashank.jpg", width: 960, height: 1280, alt: "Shashank Jha — Product Analyst" },
-    ],
     locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
     title: "Shashank Jha — Product Analyst",
     description: DESCRIPTION,
-    images: ["/shashank.jpg"],
   },
   robots: {
     index: true,
