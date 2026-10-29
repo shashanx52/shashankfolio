@@ -42,7 +42,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="display text-step-d"
         >
-          Shashank
+          Shashank{" "}
           <br />
           <span className="ink-soft">Jha</span>
         </motion.h1>
