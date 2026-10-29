@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ScrollProgress from "./components/ScrollProgress";
 import Motion from "./components/Motion";
+import { structuredData } from "./structured-data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,8 +33,12 @@ export const metadata: Metadata = {
   applicationName: "Shashank Jha",
   authors: [{ name: "Shashank Jha", url: SITE }],
   creator: "Shashank Jha",
+  publisher: "Shashank Jha",
   keywords: [
     "Shashank Jha",
+    "shashanx",
+    "shashanx52",
+    "Shashank Jha Product Analyst",
     "Product Analyst",
     "product analytics",
     "marketing analytics",
@@ -52,12 +57,16 @@ export const metadata: Metadata = {
     siteName: "Shashank Jha",
     title: "Shashank Jha — Product Analyst",
     description: DESCRIPTION,
+    images: [
+      { url: "/shashank.jpg", width: 960, height: 1280, alt: "Shashank Jha — Product Analyst" },
+    ],
     locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
     title: "Shashank Jha — Product Analyst",
     description: DESCRIPTION,
+    images: ["/shashank.jpg"],
   },
   robots: {
     index: true,
@@ -113,6 +122,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <a href="#main" className="skip-link">
