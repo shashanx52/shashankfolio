@@ -75,7 +75,7 @@ const website = {
   name: "Shashank Jha",
   description:
     "Portfolio of Shashank Jha — Product Analyst at Times Internet (The Economic Times).",
-  inLanguage: "en",
+  inLanguage: "en-IN",
   publisher: { "@id": PERSON_ID },
 };
 
@@ -89,7 +89,7 @@ const profilePage = {
   isPartOf: { "@id": WEBSITE_ID },
   about: { "@id": PERSON_ID },
   mainEntity: { "@id": PERSON_ID },
-  inLanguage: "en",
+  inLanguage: "en-IN",
 };
 
 export const structuredData = {

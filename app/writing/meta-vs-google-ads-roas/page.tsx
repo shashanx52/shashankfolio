@@ -40,7 +40,7 @@ const articleSchema = {
   mainEntityOfPage: { "@type": "WebPage", "@id": URL_PATH },
   datePublished: "2026-06-27",
   dateModified: "2026-08-15",
-  inLanguage: "en",
+  inLanguage: "en-IN",
   author: { "@id": "https://shashanx.in/#person" },
   publisher: { "@id": "https://shashanx.in/#person" },
   about: ["Return on ad spend", "Meta Ads", "Google Ads", "Marketing attribution"],
