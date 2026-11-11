@@ -4,6 +4,7 @@ import Link from 'next/link';
 const pages = [
   { label: 'About', href: '/' },
   { label: 'Work', href: '/projects' },
+  { label: 'Games', href: '/games' },
   { label: 'Experience', href: '/experience' },
   { label: 'Contact', href: '/contact' },
 ];

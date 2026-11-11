@@ -13,6 +13,7 @@ const SITE = "https://shashanx.in";
 const routes: Array<{ path: string; priority: number; lastModified: string }> = [
   { path: "/", priority: 1, lastModified: "2026-08-15" },
   { path: "/projects", priority: 0.8, lastModified: "2026-08-15" },
+  { path: "/games", priority: 0.7, lastModified: "2026-11-11" },
   { path: "/experience", priority: 0.8, lastModified: "2026-08-15" },
   { path: "/contact", priority: 0.6, lastModified: "2026-08-15" },
   { path: "/writing/meta-vs-google-ads-roas", priority: 0.6, lastModified: "2026-08-15" },

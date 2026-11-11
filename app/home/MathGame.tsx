@@ -96,7 +96,7 @@ const MathGame: React.FC = () => {
   );
 
   return (
-    <Section index="03" label="Play">
+    <Section index="03" label="Play" id="play">
       <Reveal>
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <p className="max-w-xl text-xl sm:text-2xl font-medium leading-snug tracking-tight">
