@@ -8,6 +8,7 @@ import BulbToggle from "./components/BulbToggle";
 const navLinks = [
   { label: "About", href: "/" },
   { label: "Work", href: "/projects" },
+  { label: "Games", href: "/games" },
   { label: "Experience", href: "/experience" },
   { label: "Contact", href: "/contact" },
 ];
